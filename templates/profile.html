@@ -1,0 +1,44 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% block content %}
+    <!-- Sign Up -->
+
+    <article id="main" class = 'alt'>
+        <header>
+            <h2>Welcome ,{{ user.first_name }}.</h2>
+
+            <p>This is your settings page.</p>
+        </header>
+        <section id="anim" class="wrapper style0 special">
+            <div class="inner">
+                <ul class="features ">
+                    <li class="icon fa-facebook-official ripplelink">
+                        <a href="social">
+                            <h3>Social Media Settings</h3>
+
+                            <p>Add/Change Facebook Account.</p></a>
+                    </li>
+                    <li class="icon fa-lightbulb-o ripplelink">
+                        <a href="hue">
+                            <h3>Hue Settings</h3>
+
+                            <p>Add and Delete Lamps.</p></a>
+                    </li>
+                    <li class="icon fa-cogs ripplelink">
+                        <a href="account">
+                            <h3>Account Settings</h3>
+
+                            <p>See your e-mail , Password, and other settings.</p></a>
+                    </li>
+                    <li class="icon fa-sliders ripplelink">
+                        <a href="preferences">
+                        <h3>Color Settings</h3>
+
+                        <p>Assign a Color relative to classified feelings.</p></a>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+    </article>
+{% endblock %}

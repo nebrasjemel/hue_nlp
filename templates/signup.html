@@ -1,0 +1,50 @@
+{% extends "base2.html" %}
+{% load staticfiles %}
+{% block content %}
+    <!-- Sign Up -->
+    <article id="main">
+        <header>
+            <h2>Sign Up</h2>
+
+            <p>{{ message }}</p>
+        </header>
+        <section class="wrapper style5">
+            <div class="inner">
+                <form method="post" action="/signup"> {% csrf_token %}
+                    <div class="row uniform">
+                        <div class="12u$">
+                            <input type="text" name="username" id="username" value="" placeholder="Username" required/>
+                        </div>
+                        <div class="6u 12u$(xsmall)">
+                            <input type="text" name="first_name" id="first_name" value="" placeholder="First Name"
+                                   required/>
+                        </div>
+                        <div class="6u$ 12u$(xsmall)">
+                            <input type="text" name="last_name" id="last_name" value="" placeholder="Last Name"
+                                   required/>
+                        </div>
+                        <div class="12u$">
+                            <input type="email" name="email" id="email" value="" placeholder="email@abc.xyz" required/>
+                        </div>
+                        <div class="6u 12u$(xsmall)">
+                            <input type="password" name="password" id="password" value="" placeholder="Password"
+                                   required/>
+                        </div>
+                        <div class="6u$ 12u$(xsmall)">
+                            <input type="password" name="password2" id="password2" value=""
+                                   placeholder="Retype Password" required/>
+                        </div>
+
+                        <div class="12u$">
+                            <ul class="actions">
+                                <li><input type="submit" value="Sign Up" class="special"/></li>
+                                <li><input type="reset" value="Reset"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </article>
+
+{% endblock %}

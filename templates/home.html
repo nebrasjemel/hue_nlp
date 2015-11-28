@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <!-- Banner -->
+    <section id="banner">
+        <div class="inner">
+            <h2>A Lamp That Feels You.</h2>
+
+            <p>A <a href="http://cs50.harvard.edu">CS50</a> Final Project<br/>
+                exploring natural language processing,<br/>
+                sentiment analysis,Facebook's API and Philips Hue.</p>
+            <ul class="actions">
+                <li><a href="#two" class="button special scrolly">Sign Up</a></li>
+                <li><a href="#one" class="button scrolly">Sign In</a></li>
+            </ul>
+        </div>
+        <a href="#details" class="more scrolly">Learn More</a>
+    </section>
+    <section id="one" class="wrapper alt style2">
+        <section class="spotlight">
+            <div class="image"><img src="{% static 'images/pic01.jpg' %}" alt=""/></div>
+            <div class="content">
+                <h2>Sign In<br/></h2>
+
+                <form method="post" action="/signin"> {% csrf_token %}
+                    <div class="row uniform">
+                        <div class="12u$">
+                            <input type="text" name="username" id="username" value="" placeholder="Username" required/>
+                        </div>
+
+                        <div class="12u$">
+                            <input type="password" name="password" id="password" value="" placeholder="Password"
+                                   required/>
+                        </div>
+                        <div class="12u$">
+                            <ul class="actions">
+                                <li><input type="submit" value="Sign In"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </section>
+        <section id="two" class="spotlight">
+            <div class="image"><img src="{% static 'images/pic02.jpg' %}" alt=""/></div>
+            <div class="content">
+                <h2>Sign Up<br/>
+                    {% if form.errors %}
+                        <p>Your username and password didn't match. Please try again.</p>
+                    {% endif %}</h2>
+                <form method="post" action="/signup"> {% csrf_token %}
+                    <div class="row uniform">
+                        <div class="6u 12u$(xsmall)">
+                            <input type="text" name="username" id="username" value="" placeholder="Username" required/>
+                        </div>
+                        <div class="6u$ 12u$(xsmall)">
+                            <input type="email" name="email" id="email" value="" placeholder="Email Address" required/>
+                        </div>
+                        <div class="6u 12u$(xsmall)">
+                            <input type="text" name="first_name" id="first_name" value="" placeholder="First Name"
+                                   required/>
+                        </div>
+                        <div class="6u$ 12u$(xsmall)">
+                            <input type="text" name="last_name" id="last_name" value="" placeholder="Last Name"
+                                   required/>
+                        </div>
+
+                        <div class="6u 12u$(xsmall)">
+                            <input type="password" name="password" id="password" value="" placeholder="Password"
+                                   required/>
+                        </div>
+                        <div class="6u$ 12u$(xsmall)">
+                            <input type="password" name="password2" id="password2" value=""
+                                   placeholder="Retype Password" required/>
+                        </div>
+
+                        <div class="12u$">
+                            <ul class="actions">
+                                <li><input type="submit" value="Sign Up" class="special"/></li>
+                                <li><input type="reset" value="Reset"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </section>
+
+
+{% endblock %}
