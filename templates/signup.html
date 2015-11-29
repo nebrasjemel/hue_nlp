@@ -2,12 +2,6 @@
 {% load staticfiles %}
 {% block content %}
     <!-- Sign Up -->
-    <article id="main">
-        <header>
-            <h2>Sign Up</h2>
-
-            <p>{{ message }}</p>
-        </header>
         <section class="wrapper style5">
             <div class="inner">
                 <form method="post" action="/signup"> {% csrf_token %}
@@ -45,6 +39,5 @@
                 </form>
             </div>
         </section>
-    </article>
 
 {% endblock %}

@@ -1,32 +1,16 @@
 {% extends "base2.html" %}
 {% load staticfiles %}
 {% block content %}
+
     <!-- Sign Up -->
-
-    <article id="main">
-        <header>
-            <h2>Social Settings</h2>
-
-            <p>{{ message }}</p>
-        </header>
+    <div id="fb-root"></div>
+    <script src="{% static 'assets/js/facebook.js' %}"></script>
         <section class="wrapper style5">
             <div class="inner">
-                <form method="post" action="/signup"> {% csrf_token %}
-                    <div class="row uniform">
-                        <div class="12u$">
-                            <input type="text" name="username" id="username" value="" placeholder="Username" required/>
-                        </div>
-                        <div class="12u$">
-                            <input type="password" name="password" id="password" value="" placeholder="Password"
-                                   required/>
-                        </div>
-                        <div class="12u$">
-                            <ul class="actions">
-                                <li><input type="submit" value="Sign In" class="special"/></li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
+                <h2 class="align-center" ><fb:login-button scope="public_profile,email" onlogin="checkLoginState();" data-size="xlarge">
+                </fb:login-button></h2>
+                <div id="status">
+                </div>
             </div>
         </section>
     </article>

@@ -6,20 +6,31 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def profile(request):
-    return render(request, "profile.html", {})
+    title = "Welcome, " + request.user.get_username()
+    message = "This is your settings page."
+    return render(request, "profile.html", {'title': title, 'message': message})
+
 
 @login_required
 def social(request):
-    return render(request, "social.html", {})
+    title = "Social Settings"
+    message = "Manage Your Social Media Accounts"
+    return render(request, "social.html", {'title': title, 'message': message})
+
 
 @login_required
 def hue(request):
-    return render(request, "hue.html", {})
+    title = "Philips Hue Settings"
+    return render(request, "hue.html", {'title': title})
+
 
 @login_required
 def account(request):
-    return render(request, "account.html", {})
+    title = "Account Settings"
+    return render(request, "account.html", {'title': title})
+
 
 @login_required
 def preferences(request):
-    return render(request, "account.html", {})
+    title = "Color Preferences"
+    return render(request, "account.html", {'title': title})
