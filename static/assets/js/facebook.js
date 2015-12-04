@@ -6,13 +6,9 @@
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
+    // Check Response Object
     if (response.status === 'connected') {
-        // Logged into your app and Facebook.
-        testAPI();
+        postInfo();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
@@ -73,11 +69,13 @@ window.fbAsyncInit = function () {
 
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
-function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function (response) {
-        console.log('Successful login for: ' + response.name);
+function postInfo() {
+    console.log('Start '); 
+    FB.api('/me?fields=name,posts', function (response) {
+        console.log('Successful login for: ' + response);
         document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '!';
+            'Thanks for logging in, ' + response.name+ '! ';
+        document.getElementById('status').innerHTML +=
+            'Your last status: ' + response.posts.data[0].story;
     });
 }

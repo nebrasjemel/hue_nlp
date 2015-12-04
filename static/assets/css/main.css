@@ -3817,13 +3817,17 @@
 	body.is-mobile.landing #footer {
 		background-color: #1d242a;
 	}
+	
+	.hidden {
+		display: none;
+	}
 
 
 /* Django Error Codes */
-    .errorlist ul li {
-        list-style-type: none;
-        padding:0;
-        margin:0;
+    li {
+    	list-style-type: none;
+    	padding:0;
+    	margin:0;
     }
 
 /* MAterial Design like hovering*/

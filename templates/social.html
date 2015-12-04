@@ -7,9 +7,31 @@
     <script src="{% static 'assets/js/facebook.js' %}"></script>
         <section class="wrapper style5">
             <div class="inner">
-                <h2 class="align-center" ><fb:login-button scope="public_profile,email" onlogin="checkLoginState();" data-size="xlarge">
-                </fb:login-button></h2>
+                <header class="major align-center">
+                <h2>Your Current Accounts</h2> 
+                </header>
                 <div id="status">
+                </div>
+                <div>
+                    <table class="table-wrapper">
+                        <thead>
+                        <tr>                            
+                            <th>Network</th>
+                            <th>Account</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><i class="icon fa-facebook-square fa-lg"></i> Facebook</td>
+                            <td><fb:login-button scope="public_profile,email,user_posts,user_status" onlogin="checkLoginState();" data-size="large">
+                </fb:login-button></td>
+                        </tr>
+                        <tr>
+                            <td><i class="icon fa-twitter-square fa-lg"></i> Twitter</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>

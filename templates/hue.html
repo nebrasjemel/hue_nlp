@@ -1,0 +1,69 @@
+{% extends "base2.html" %} {% load staticfiles %} {% block content %}
+<!-- Hue Form -->
+
+<section class="wrapper style5">
+    <div class="inner">
+        <header class="major align-center">
+            <h2>Your Current Hues</h2> {% if query %}
+        </header>
+        <div>
+            <table class="table-wrapper">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Lamp Adress</th>
+                        <th>Associated Account</th>
+                        <th colspan="2">Quick Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for each_model in query %}
+                    <td>{{each_model.username}}</td>
+                    <td>{{each_model.ip_address}}</td>
+                    <td>{{each_model.related_account.account_name}}</td>
+                    <td><i class="icon fa-trash fa-lg"></i></td>
+                    <td><i class="icon fa-pencil fa-lg"></i></td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>You Don't have any Hues Configured. Please Add one.</p>
+        </header>
+        {% endif %}
+        <header class="major align-center">
+            <h2>Add a Philips Hue</h2>{%if accounts%}</header>
+        <form method="post" action="/hue"> {% csrf_token %}
+            <div class="row uniform">
+                <div class="12u$">
+                    <input type="text" name="username" id="username" value="" placeholder="Username" required/>
+                </div>
+                <div class="6u">
+                    <input type="text" name="ip_address" id="ip_address" value="" placeholder="IP Adress" required/>
+                </div>
+                <div class="6u$">
+                    <div class="select-wrapper">
+                        <select name="related_account_id" id="related_account_id">
+                            {% for option in accounts %}
+                            <option value={{option.id}}>{{option.account_name}}</option>
+                            {%endfor%}
+
+                        </select>
+                    </div>
+                </div>
+                <div class="12u$">
+                    <ul class="actions">
+                        <li>
+                            <input type="submit" value="Add Hue" class="special" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        {% else %}
+        <p>You Don't have Any social Account Configured.</p>
+        </header>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

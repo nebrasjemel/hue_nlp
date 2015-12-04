@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from models import FacebookAccount, PhilipsHue
+from Interface.forms import FbForm, HueForm
 
 
 # Create your views here.
@@ -15,13 +17,51 @@ def profile(request):
 def social(request):
     title = "Social Settings"
     message = "Manage Your Social Media Accounts"
-    return render(request, "social.html", {'title': title, 'message': message})
+    query = FacebookAccount.objects.filter(user_id=request.user.id)
+    if request.method == 'POST':
+        form = FbForm(data=request.POST)
+        form.user= request.user
+        if form.is_valid():
+            # Save the user's form data to the database.
+            form.save()
+            message = "Hue Added Successfully"
+
+        # Print problems to terminal
+        else:
+            print(form.errors)
+            message = form.errors
+
+    # Not POST , redirect to needed page
+    else:
+        message = "Configure your Social Accounts"
+
+    return render(request, "social.html", {'title': title,'message': message, 'query':query})
 
 
 @login_required
 def hue(request):
     title = "Philips Hue Settings"
-    return render(request, "hue.html", {'title': title})
+    message = "Manage Your Social Media Accounts"
+    query = PhilipsHue.objects.filter(user_id=request.user.id)
+    accounts = FacebookAccount.objects.filter(user_id=request.user.id)
+    if request.method == 'POST':
+        form = HueForm(data=request.POST)
+        form.user= request.user
+        if form.is_valid():
+            # Save the user's form data to the database.
+            form.save()
+            message = "Hue Added Successfully"
+
+        # Print problems to terminal
+        else:
+            print(form.errors)
+            message = form.errors
+
+    # Not POST , redirect to needed page
+    else:
+        message = "Configure your Philips Hue Lamps"
+
+    return render(request, "hue.html", {'title': title,'message': message, 'query':query, 'accounts':accounts})
 
 
 @login_required
@@ -33,4 +73,4 @@ def account(request):
 @login_required
 def preferences(request):
     title = "Color Preferences"
-    return render(request, "account.html", {'title': title})
+    return render(request, "color.html", {'title': title})
