@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from models import FacebookAccount, PhilipsHue
-from Interface.forms import FbForm, HueForm
+from Interface.models import FacebookAccount, PhilipsHue
+from Interface.forms import FbForm
+import socket
 
 
 # Create your views here.
@@ -20,7 +21,7 @@ def social(request):
     query = FacebookAccount.objects.filter(user_id=request.user.id)
     if request.method == 'POST':
         form = FbForm(data=request.POST)
-        form.user= request.user
+        form.user = request.user
         if form.is_valid():
             # Save the user's form data to the database.
             form.save()
@@ -34,8 +35,7 @@ def social(request):
     # Not POST , redirect to needed page
     else:
         message = "Configure your Social Accounts"
-
-    return render(request, "social.html", {'title': title,'message': message, 'query':query})
+    return render(request, "social.html", {'title': title, 'message': message, 'query': query})
 
 
 @login_required
@@ -45,23 +45,20 @@ def hue(request):
     query = PhilipsHue.objects.filter(user_id=request.user.id)
     accounts = FacebookAccount.objects.filter(user_id=request.user.id)
     if request.method == 'POST':
-        form = HueForm(data=request.POST)
-        form.user= request.user
-        if form.is_valid():
-            # Save the user's form data to the database.
-            form.save()
-            message = "Hue Added Successfully"
-
+        related = FacebookAccount.objects.filter(account_name=request.POST['related_account'])
+        form = PhilipsHue(user=request.user, username=request.POST['username'], ip_address=request.POST['ip_address'],
+                          related_account=related[0])
+        # Save the user's form data to the database.
+        form.save()
+        message = "Hue Added Successfully"
         # Print problems to terminal
-        else:
-            print(form.errors)
-            message = form.errors
+        print(request.POST['related_account'])
+
 
     # Not POST , redirect to needed page
     else:
         message = "Configure your Philips Hue Lamps"
-
-    return render(request, "hue.html", {'title': title,'message': message, 'query':query, 'accounts':accounts})
+    return render(request, "hue.html", {'title': title, 'message': message, 'query': query, 'accounts': accounts})
 
 
 @login_required

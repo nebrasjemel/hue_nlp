@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -27,6 +26,7 @@ urlpatterns = [
     url(r'^preferences', 'Interface.views.preferences'),
     url(r'^hue', 'Interface.views.hue'),
     url(r'^account', 'Interface.views.account'),
+    url(r'^data', 'classifier.views.scrap'),
     #remember to remove before deploying
     url(r'^500/$', 'main.views.handler500'),
     url(r'^404/$', 'main.views.handler404'),

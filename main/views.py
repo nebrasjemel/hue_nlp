@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from main.forms import SignInForm, SignupForm
+from main.forms import SignupForm
 from django.contrib.auth import authenticate, login
 from django.template import RequestContext
 from django.http import HttpResponse
@@ -7,13 +7,15 @@ from django.http import HttpResponse
 
 # Create your views here.
 
+
 def home(request):
     return render(request, "home.html", )
 
-def webhooks(request):
-    if request.method == 'GET':
-    if request.method == 'POST':
-    return HttpResponse()
+
+# def webhooks(request):
+#   if request.method == 'GET':
+#  if request.method == 'POST':
+# return HttpResponse()
 
 
 def sign_in(request):
@@ -27,7 +29,7 @@ def sign_in(request):
                 login(request, user)
                 return redirect('/profile')
             else:
-                message = "Account Disabeled"
+                message = "Account Disabled"
         else:
             message = "Username/Password do not exist. Please try Again."
     else:
@@ -41,8 +43,8 @@ def sign_up(request):
         form = SignupForm(data=request.POST)
         if form.is_valid():
             if request.POST['password'] != request.POST['password2']:
-                message= "Passwords did not match. Please try again"
-            else :
+                message = "Passwords did not match. Please try again"
+            else:
                 # Save the user's form data to the database.
                 user = form.save()
                 # Hash Password
@@ -61,7 +63,6 @@ def sign_up(request):
     else:
         message = "If not already a Member."
     return render(request, "signup.html", {"message": message, "title": title})
-
 
 
 def handler404(request):
