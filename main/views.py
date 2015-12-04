@@ -2,11 +2,18 @@ from django.shortcuts import render, redirect
 from main.forms import SignInForm, SignupForm
 from django.contrib.auth import authenticate, login
 from django.template import RequestContext
+from django.http import HttpResponse
+
 
 # Create your views here.
 
 def home(request):
     return render(request, "home.html", )
+
+def webhooks(request):
+    if request.method == 'GET':
+    if request.method == 'POST':
+    return HttpResponse()
 
 
 def sign_in(request):
