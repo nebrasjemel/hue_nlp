@@ -17,7 +17,6 @@ def profile(request):
 @login_required
 def social(request):
     title = "Social Settings"
-    message = "Manage Your Social Media Accounts"
     query = FacebookAccount.objects.filter(user_id=request.user.id)
     if request.method == 'POST':
         form = FbForm(data=request.POST)
@@ -34,7 +33,7 @@ def social(request):
 
     # Not POST , redirect to needed page
     else:
-        message = "Configure your Social Accounts"
+        message = "Manage Your Social Media Accounts"
     return render(request, "social.html", {'title': title, 'message': message, 'query': query})
 
 
