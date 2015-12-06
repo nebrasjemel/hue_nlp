@@ -3,7 +3,8 @@ from django.contrib import admin
 
 
 # Create your models here.
-
+// here is the database we are going to use to trach words
+// for each word, we track whether it is related to some feeling
 class Database(models.Model):
     word = models.CharField(max_length=100, unique=True)
     anger = models.BooleanField(default=0)
