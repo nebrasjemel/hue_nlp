@@ -3,14 +3,17 @@
  */
 
 
+// formats a string such that it takes everything to lowercase except for the 
+// first letter, just to make it look nice
 function format(str) {
-    return str.replace(/\w\S*/g, function (txt) {
+    return str.replace(/\w\S*/g, function(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 }
 
+// this function updates the lamp by issuing PUT request and using 
+// Ajax to continuously get user statuses without reloading the page
 function update_lamp(ip_address, username, emotion) {
-
     function ajax_lamp(hue, bri, sat, number) {
         console.log("Lamp is updating : {\"bri\":" + bri + "\"sat\":" + sat + "\"hue\":' " + hue + "'}'") // sanity check
         $.ajax({
@@ -18,22 +21,26 @@ function update_lamp(ip_address, username, emotion) {
             type: "PUT", // http method
             data: '{"bri":' + bri + ',"sat":' + sat + ',"hue":' + hue + '}', // data sent with the post request
             // handle a successful response
-            success: function (json) {
+            success: function(json) {
                 $('#color').text('Success'); // remove the value from the input
                 console.log(json); // log the returned json to the console
                 console.log("success"); // another sanity check
             },
 
             // handle a non-successful response
-            error: function (xhr, errmsg, err) {
+            error: function(xhr, errmsg, err) {
                 $('#color').text('Failure'); // remove the value from the input
                 console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
             }
         });
     }
-
+    // if the user's text doesn't suggest any emotion, we set everything to 0
     if (emotion != "none") {
-        var bri = [0, 0, 0], hue = [0, 0, 0], sat = [0, 0, 0];
+        var bri = [0, 0, 0],
+            hue = [0, 0, 0],
+            sat = [0, 0, 0];
+        // in all the other cases, we output the light coor, brightness and
+        // saturation that we've seen it is associated with those feelings
         if (emotion == "sadness") {
             bri = [254, 150, 150];
             hue = [49342, 23862, 43717];
@@ -70,38 +77,57 @@ function update_lamp(ip_address, username, emotion) {
     }
 };
 
+// as it says, the function gets emotion from a status
 function get_emotion(status) {
+    console.log($("#related_account").val());
+    var obj=$("#related_account").val().split(":");
     console.log("Classifying string") // sanity check
+    var ip_address = $('#ip_address').text()
     $.ajax({
         url: "/classify", // the endpoint
         type: "POST", // http method
-        data: {"status": status}, // data sent with the post request
+        data: {
+            "status": status
+        }, // data sent with the post request
 
         // handle a successful response
-        success: function (json) {
+        success: function(json) {
             $('#emotion').text(format(json.result)); // remove the value from the input
             console.log(json); // log the returned json to the console
             console.log("success"); // another sanity check
-            update_lamp("192.168.1.106", "1ea00fa13605c157350bb6d53d8f1b6b", json.result)
+            update_lamp(obj[0], obj[1], json.result)
         },
 
         // handle a non-successful response
-        error: function (xhr, errmsg, err) {
-            $('#color').text('Success'); // remove the value from the input
+        error: function(xhr, errmsg, err) {
+            console.log("failure"); // remove the value from the input
             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
     });
 };
 
-$(document).ready(function () {
-    setInterval(function () {
-    }, 20000);
-
-    $("#test2").click(function (e) {
+// check if the document is ready
+$(document).ready(function() {
+    // runc checks if the app is still running
+    var run = false;
+    $("#run").click(function(e) {
         e.preventDefault();
-        var value = $('#gotcha').val();
-        console.log(value)
-        get_emotion(value.toLowerCase());
+        run = true;
+        $("#choice").hide(400);
+        $("#engine").show(700);
     });
+    setInterval(function() {
+        if (run == true) {
+            FB.api('/me?fields=id,name,posts', function(response) {
+                var i = 0;
+                while (!response.posts.data[i].message) {
+                    i++;
+                }
+                var value = response.posts.data[i].message;
+                console.log(value);
+                $('#status').text(value);
+                get_emotion(value.toLowerCase());
+            });
+        }
+    }, 5000);
 });
-

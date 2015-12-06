@@ -8,7 +8,8 @@ function statusChangeCallback(response) {
     console.log(response);
     // Check Response Object
     if (response.status === 'connected') {
-        postInfo(response.authResponse.accessToken);
+        if (!document.getElementById('fb_id')){
+        postInfo(response.authResponse.accessToken);}
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
@@ -73,10 +74,6 @@ function postInfo(token) {
     console.log('Start ');
     FB.api('/me?fields=id,name', function (response) {
         console.log('Successful login for: ' + response);
-        document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '! ';
-        document.getElementById('status').innerHTML +=
-            'Your last status: ' + response.posts.data[0].story;
         if (!$("#quey").length) {
             $.ajax({
                 url: "/social", // the endpoint
@@ -90,7 +87,7 @@ function postInfo(token) {
 
                 // handle a non-successful response
                 error: function (xhr, errmsg, err) {
-                    $('#status').text('Failure to add to DB'); // remove the value from the input
+                    console.log('Failure to add to DB ');
                     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
                 }
             });

@@ -13,10 +13,30 @@
 <body>
 <!-- Page Wrapper -->
 <div id="page-wrapper">
-
     <!-- Header -->
     <header id="header">
         <h1><a href="/">Sentalight | Profile</a></h1>
+        {% if user.is_authenticated %}
+        {% block navbar %}
+            <nav id="nav">
+                <ul>
+                    <li class="special">
+                        <a href="#menu" class="menuToggle"><span>Menu</span></a>
+
+                        <div id="menu">
+                            <ul>
+                                <li><a href="/profile">Profile</a></li>
+                                <li><a href="/social">Social Media Settings</a></li>
+                                <li><a href="/hue">Philips hue Settings</a></li>
+                                <li><a href="/account">Account Settings</a></li>
+                                <li><a href="/signout">Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        {% endblock %}
+        {% else %}
         {% block navbar %}
             <nav id="nav">
                 <ul>
@@ -26,8 +46,6 @@
                         <div id="menu">
                             <ul>
                                 <li><a href="/">Home</a></li>
-                                <li><a href="#details">Project Details</a></li>
-                                <li><a href="#us">About Us</a></li>
                                 <li><a href="#two" class="scrolly">Sign Up</a></li>
                                 <li><a href="#one" class="scrolly">Log In</a></li>
                             </ul>
@@ -36,6 +54,8 @@
                 </ul>
             </nav>
         {% endblock %}
+        {% endif %}
+
     </header>
     <article id="main">
         <header>

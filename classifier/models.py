@@ -1,3 +1,4 @@
+# import the django libraries
 from django.db import models
 from django.contrib import admin
 

@@ -1,4 +1,6 @@
+# this is our database
 # -*- coding: utf-8 -*-
+# import the necessary libraries
 from __future__ import unicode_literals
 
 from django.db import migrations, models
@@ -8,7 +10,8 @@ class Migration(migrations.Migration):
 
     dependencies = [
     ]
-
+    
+    # create the model of the database, with the 10 fields
     operations = [
         migrations.CreateModel(
             name='Database',

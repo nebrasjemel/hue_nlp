@@ -1,63 +1,85 @@
-{% extends "base2.html" %}
-{% load staticfiles %}
-{% block content %}
-    <div class="hidden"><div id="fb_id">{{ fb_id }}</div><div id="fb_token">{{ fb_token }}</div></div>
-    <script language="JavaScript" type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/js/engine.js' %}"></script>
-    <section id="engine" class="wrapper style1 special">
-        <header class="major align-center">
-            <h2>Your App Status</h2>
-        </header>
-        <div class="inner">
-            <span>
+{% extends "base2.html" %} {% load staticfiles %} {% block content %}
+<div id="fb-root"></div>
+<script src="{% static 'assets/js/facebook.js' %}"></script>
+<div class="hidden">
+    <div id="ip_address"></div>
+    <div id="hue_username"></div>
+</div>
+<script language="JavaScript" type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/engine.js' %}"></script>
+<section id="choice" class="wrapper style1 special">
+    <header class="major align-center"> {% if query %}
+        <h2>Choose your bridge</h2>
+    </header>
+    <div class="inner">
+        <div class="12u$">
+            <div class="select-wrapper">
+                <select name="related_account" id="related_account">
+                    {% for option in query %}
+                    <option value="{{ option.ip_address}}:{{option.username}}">{{ option.related_account.account_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="submit" id="run" value="Start" class="special" />
+        </div>
+    </div>
+    {% else %}
+    <h2>First , Configure your bridges and social media accounts</h2>
+    </header>
+    {% endif %}
+</section>
+<section id="engine" class="wrapper style1 special hidden">
+    <header class="major align-center">
+        <h2>Your App Status</h2>
+    </header>
+    <div class="inner">
+        <span>
                 <i class="fa fa-spinner fa-spin fa-2x"></i>
             </span>
-            <ul class="actions vertical alt align-left">
-                <li>Last Status: <em id="status"></em></li>
-                <li>Emotion: <em id="emotion"></em></li>
-                <li>Color: <em id="color"></em></li>
-            </ul>
-        </div>
-        <div class="6u 12u$(xsmall)">
-            <input type="text" name="first_name" id="gotcha" value="" placeholder="Status"
-                   required/>
-        </div>
-        <input type="submit" id="test" value="Run" class="special"/>
-        <input type="submit" id="test2" value="Classify"/>
-    </section>
+        <ul class="actions vertical alt align-left">
+            <li>Last Status: <em id="status"></em></li>
+            <li>Emotion: <em id="emotion"></em></li>
+            <li>Bridge Connection: <em id="color"></em></li>
+        </ul>
+    </div>
+</section>
 
-    <section class="wrapper style0 special">
-        <header class="major align-center">
-            <h2>Your App Settings</h2>
-        </header>
-        <div class="inner">
-            <ul class="features ">
-                <li class="icon fa-facebook-official ripplelink">
-                    <a href="social">
-                        <h3>Social Media Settings</h3>
+<section class="wrapper style0 special">
+    <header class="major align-center">
+        <h2>Your App Settings</h2>
+    </header>
+    <div class="inner">
+        <ul class="features ">
+            <li class="icon fa-facebook-official ripplelink">
+                <a href="social">
+                    <h3>Social Media Settings</h3>
 
-                        <p>Add/Change Facebook Account.</p></a>
-                </li>
-                <li class="icon fa-lightbulb-o ripplelink">
-                    <a href="hue">
-                        <h3>Hue Settings</h3>
+                    <p>Add/Change Facebook Account.</p>
+                </a>
+            </li>
+            <li class="icon fa-lightbulb-o ripplelink">
+                <a href="hue">
+                    <h3>Hue Settings</h3>
 
-                        <p>Add and Delete Lamps.</p></a>
-                </li>
-                <li class="icon fa-cogs ripplelink">
-                    <a href="account">
-                        <h3>Account Settings</h3>
+                    <p>Add and Delete Lamps.</p>
+                </a>
+            </li>
+            <li class="icon fa-cogs ripplelink">
+                <a href="account">
+                    <h3>Account Settings</h3>
 
-                        <p>See your e-mail , Password, and other settings.</p></a>
-                </li>
-                <li class="icon fa-sliders ripplelink">
-                    <a href="preferences">
-                        <h3>Color Settings</h3>
+                    <p>See your e-mail , Password, and other settings.</p>
+                </a>
+            </li>
+            <li class="icon fa-sliders ripplelink">
+                <a href="preferences">
+                    <h3>Color Settings</h3>
 
-                        <p>Assign a Color relative to classified feelings.</p></a>
-                </li>
+                    <p>Assign a Color relative to classified feelings.</p>
+                </a>
+            </li>
 
-            </ul>
-        </div>
-    </section>
+        </ul>
+    </div>
+</section>
 {% endblock %}

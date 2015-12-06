@@ -1,0 +1,79 @@
+{% extends "base2.html" %} {% load staticfiles %} {% block content %}
+    <!-- Hue Form -->
+
+    <section class="wrapper style5">
+        <div class="inner">
+            <header class="major align-center">
+                <h2>Change your Password</h2>
+            </header>
+                <form method="post" action="/account"> {% csrf_token %}
+                    <div class="row uniform">
+                        <div class="12u$">
+                            <input type="password" name="old_password" id="old_password" value="" placeholder="Old Password" required/>
+                        </div>
+                        <div class="12u$">
+                            <input type="password" name="password" id="password" value="" placeholder="New Password"
+                                   required/>
+                        </div>
+                        <div class="12u$">
+                            <ul class="actions">
+                                <li>
+                                    <input type="submit" value="Change Password" class="special"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </section>
+    
+    <section class="wrapper style5">
+        <div class="inner">
+            <header class="major align-center">
+                <h2>Change Personal Information</h2>
+            </header>
+                <form method="post" action="/account"> {% csrf_token %}
+                    <div class="row uniform">
+                        <div class="6u">
+                            <input type="text" name="first_name" id="first_name" value="" placeholder="{{ user.first_name}}" required/>
+                        </div>
+                        <div class="6u$">
+                            <ul class="actions">
+                                <li>
+                                    <input type="submit" value="Change First name" class="special"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+                <form method="post" action="/account"> {% csrf_token %}
+                    <div class="row uniform">
+                        <div class="6u">
+                            <input type="text" name="last_name" id="last_name" value="" placeholder="{{ user.last_name}}" required/>
+                        </div>
+                        <div class="6u$">
+                            <ul class="actions">
+                                <li>
+                                    <input type="submit" value="Change Last name" class="special"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+                <form method="post" action="/account"> {% csrf_token %}
+                    <div class="row uniform">
+                        <div class="6u">
+                            <input type="email" name="email" id="email" value="" placeholder="{{ user.email}}" required/>
+                        </div>
+                        <div class="6u$">
+                            <ul class="actions">
+                                <li>
+                                    <input type="submit" value="Change E-mail" class="special"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </section>
+{% endblock %}
