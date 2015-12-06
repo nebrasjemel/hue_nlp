@@ -80,7 +80,7 @@ function postInfo() {
         $.ajax({
             url: "/social", // the endpoint
             type: "POST", // http method
-            data: {"userID": response.id, "account_name" : , "access_token"}, // data sent with the post request
+            data: {"userID": response.id, "account_name" : response.name + " @Facebook", "access_token"}, // data sent with the post request
 
             // handle a successful response
             success: function (json) {
