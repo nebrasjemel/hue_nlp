@@ -1,6 +1,7 @@
 {% extends "base2.html" %}
 {% load staticfiles %}
 {% block content %}
+    <div class="hidden"><div id="fb_id">{{ fb_id }}</div><div id="fb_token">{{ fb_token }}</div></div>
     <script language="JavaScript" type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}"></script>
     <script src="{% static 'assets/js/engine.js' %}"></script>
     <section id="engine" class="wrapper style1 special">

@@ -8,7 +8,7 @@ function statusChangeCallback(response) {
     console.log(response);
     // Check Response Object
     if (response.status === 'connected') {
-        postInfo();
+        postInfo(response.authResponse.accessToken);
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
@@ -69,9 +69,9 @@ window.fbAsyncInit = function () {
 
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
-function postInfo() {
+function postInfo(token) {
     console.log('Start ');
-    FB.api('/me?fields=id,name,posts', function (response) {
+    FB.api('/me?fields=id,name', function (response) {
         console.log('Successful login for: ' + response);
         document.getElementById('status').innerHTML =
             'Thanks for logging in, ' + response.name + '! ';
@@ -80,7 +80,7 @@ function postInfo() {
         $.ajax({
             url: "/social", // the endpoint
             type: "POST", // http method
-            data: {"userID": response.id, "account_name" : response.name + " @Facebook", "access_token"}, // data sent with the post request
+            data: {"userID": response.id, "account_name": response.name + " @Facebook", "access_token": token}, // data sent with the post request
 
             // handle a successful response
             success: function (json) {

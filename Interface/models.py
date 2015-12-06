@@ -9,11 +9,10 @@ from django.contrib import admin
 class FacebookAccount(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     account_id = models.IntegerField()
-    access_token = models.CharField(max_length=100)
     account_name = models.CharField(max_length=100)
 
     class Meta:
-        unique_together = ('user', 'account_name',)
+        unique_together = ('user', 'account_name')
 
 
 class PhilipsHue(models.Model):
