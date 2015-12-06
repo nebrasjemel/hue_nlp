@@ -23,10 +23,13 @@
                     <tbody>
                     <tr>
                         <td><i class="icon fa-facebook-square fa-lg"></i> Facebook</td>
-                        <td>
+                        <td> {% if query %}<div id="query">
+                            {{query.account_name}}
+                            {% else %}</div>
                             <fb:login-button scope="public_profile,email,user_posts,user_status"
                                              onlogin="checkLoginState();" data-size="large">
                             </fb:login-button>
+                            {% endif %}
                         </td>
                     </tr>
                     <tr>

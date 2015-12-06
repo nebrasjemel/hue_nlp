@@ -77,24 +77,23 @@ function postInfo(token) {
             'Thanks for logging in, ' + response.name + '! ';
         document.getElementById('status').innerHTML +=
             'Your last status: ' + response.posts.data[0].story;
-        $.ajax({
-            url: "/social", // the endpoint
-            type: "POST", // http method
-            data: {"userID": response.id, "account_name": response.name + " @Facebook", "access_token": token}, // data sent with the post request
+        if (!$("#quey").length) {
+            $.ajax({
+                url: "/social", // the endpoint
+                type: "POST", // http method
+                data: {"userID": response.id, "account_name": response.name + " @Facebook"}, // data sent with the post request
 
-            // handle a successful response
-            success: function (json) {
-                $('#emotion').text(format(json.result)); // remove the value from the input
-                console.log(json); // log the returned json to the console
-                console.log("success"); // another sanity check
-                update_lamp("192.168.1.106", "1ea00fa13605c157350bb6d53d8f1b6b", json.result)
-            },
+                // handle a successful response
+                success: function (json) {
+                    location.reload();
+                },
 
-            // handle a non-successful response
-            error: function (xhr, errmsg, err) {
-                $('#color').text('Success'); // remove the value from the input
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-            }
-        });
+                // handle a non-successful response
+                error: function (xhr, errmsg, err) {
+                    $('#status').text('Failure to add to DB'); // remove the value from the input
+                    console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                }
+            });
+        }
     });
 }

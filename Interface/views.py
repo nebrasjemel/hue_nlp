@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from Interface.models import FacebookAccount, PhilipsHue
-from Interface.forms import FbForm
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -18,10 +17,9 @@ def profile(request):
 @login_required
 def social(request):
     title = "Social Settings"
-    query = FacebookAccount.objects.filter(user_id=request.user.id)
+    query = FacebookAccount.objects.filter(user=request.user)
     if request.method == 'POST':
         form = FacebookAccount(user=request.user, account_id=request.POST['userID'],
-                               access_token=request.POST['access_token'],
                                account_name=request.POST['account_name'])
         # Save the user's form data to the database.
         form.save()

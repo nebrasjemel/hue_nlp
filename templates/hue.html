@@ -18,11 +18,13 @@
                         </thead>
                         <tbody>
                         {% for each_model in query %}
-                            <td>{{ each_model.username }}</td>
-                            <td>{{ each_model.ip_address }}</td>
-                            <td>{{ each_model.related_account.account_name }}</td>
-                            <td><i class="icon fa-trash fa-lg"></i></td>
-                            <td><i class="icon fa-pencil fa-lg"></i></td>
+                            <tr>
+                                <td>{{ each_model.username }}</td>
+                                <td>{{ each_model.ip_address }}</td>
+                                <td>{{ each_model.related_account.account_name }}</td>
+                                <td><i class="icon fa-trash fa-lg"></i></td>
+                                <td><i class="icon fa-pencil fa-lg"></i></td>
+                            </tr>
                         {% endfor %}
                         </tbody>
                     </table>
