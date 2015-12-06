@@ -27,7 +27,9 @@ urlpatterns = [
     url(r'^hue', 'Interface.views.hue'),
     url(r'^account', 'Interface.views.account'),
     url(r'^data', 'classifier.views.scrap'),
-    #remember to remove before deploying
+    url(r'^classify', 'classifier.views.classify'),
+
+    # remember to remove before deploying
     url(r'^500/$', 'main.views.handler500'),
     url(r'^404/$', 'main.views.handler404'),
 ]

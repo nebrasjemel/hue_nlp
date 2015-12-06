@@ -1616,7 +1616,7 @@
 	}
 
 	header.major {
-		margin: 0 0 3.5em 0;
+		margin: 0 0 1em 0;
 	}
 
 		header.major h2, header.major h3, header.major h4, header.major h5, header.major h6 {
@@ -2053,7 +2053,7 @@
 
 			ul.actions li {
 				display: inline-block;
-				padding: 0 1.5em 0 0;
+				padding: 0 0 0 0;
 				vertical-align: middle;
 			}
 
@@ -2067,7 +2067,7 @@
 
 			ul.actions.vertical li {
 				display: block;
-				padding: 1.5em 0 0 0;
+				padding: 0 0 0 0;
 			}
 
 				ul.actions.vertical li:first-child {
@@ -2802,6 +2802,44 @@
         .wrapper.style0 {
 			background-color: #ffffff;
 		}
+
+
+			.wrapper.style0 strong, .wrapper.style5 b {
+				color: #2E3842;
+			}
+
+			.wrapper.style0 h2,  .wrapper.style0 h4, .wrapper.style0 h5, .wrapper.style0 h6 {
+				color: #2E3842;
+			}
+
+			.wrapper.style0 hr {
+				border-color: #dfdfdf;
+			}
+
+			.wrapper.style0 blockquote {
+				border-color: #dfdfdf;
+			}
+
+			.wrapper.style0 code {
+				background: rgba(0, 0, 0, 0.0375);
+			}
+
+			.wrapper.style0 header p {
+				color: #8E8892;
+			}
+
+			.wrapper.style0 header.major h2, .wrapper.style5 header.major h3, .wrapper.style5 header.major h4, .wrapper.style5 header.major h5, .wrapper.style5 header.major h6 {
+				border-color: #dfdfdf;
+			}
+
+			.wrapper.style0 header.major p {
+				color: #4E4852;
+			}
+
+			.wrapper.style0 label {
+				color: #2E3842;
+			}
+
 
 		.wrapper.style3 {
 			background-color: #505393;
@@ -3570,9 +3608,9 @@
 		opacity: 1;
 	}
 
-/* CTA */
+/* Engine Display */
 
-	#cta .inner {
+	#engine .inner {
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
@@ -3580,40 +3618,36 @@
 		max-width: 45em;
 	}
 
-		#cta .inner header {
+		#engine .inner span {
 			-moz-order: 1;
 			-webkit-order: 1;
 			-ms-order: 1;
 			order: 1;
-			padding-right: 3em;
-			width: 70%;
+			width: 15%;
 		}
 
-			#cta .inner header p {
-				color: inherit;
-			}
 
-		#cta .inner .actions {
+		#engine .inner .actions {
 			-moz-order: 2;
-			-webkit-order: 2;
+			-webkit-order: 2;5
 			-ms-order: 2;
 			order: 2;
-			width: 30%;
+			width: 70%;
 		}
 
 		@media screen and (max-width: 980px) {
 
-			#cta .inner {
+			#engine .inner {
 				display: block;
 				text-align: center;
 			}
 
-				#cta .inner header {
+				#engine .inner span {
 					padding-right: 0;
 					width: 100%;
 				}
 
-				#cta .inner .actions {
+				#engine .inner .actions {
 					margin-left: auto;
 					margin-right: auto;
 					max-width: 20em;
@@ -3624,7 +3658,7 @@
 
 		@media screen and (max-width: 736px) {
 
-			#cta .inner .actions {
+			#engine .inner .actions {
 				max-width: none;
 			}
 
@@ -3817,7 +3851,7 @@
 	body.is-mobile.landing #footer {
 		background-color: #1d242a;
 	}
-	
+
 	.hidden {
 		display: none;
 	}

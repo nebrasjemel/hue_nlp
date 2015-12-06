@@ -70,12 +70,31 @@ window.fbAsyncInit = function () {
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
 function postInfo() {
-    console.log('Start '); 
-    FB.api('/me?fields=name,posts', function (response) {
+    console.log('Start ');
+    FB.api('/me?fields=id,name,posts', function (response) {
         console.log('Successful login for: ' + response);
         document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name+ '! ';
+            'Thanks for logging in, ' + response.name + '! ';
         document.getElementById('status').innerHTML +=
             'Your last status: ' + response.posts.data[0].story;
+        $.ajax({
+            url: "/social", // the endpoint
+            type: "POST", // http method
+            data: {"userID": response.id, "account_name" : , "access_token"}, // data sent with the post request
+
+            // handle a successful response
+            success: function (json) {
+                $('#emotion').text(format(json.result)); // remove the value from the input
+                console.log(json); // log the returned json to the console
+                console.log("success"); // another sanity check
+                update_lamp("192.168.1.106", "1ea00fa13605c157350bb6d53d8f1b6b", json.result)
+            },
+
+            // handle a non-successful response
+            error: function (xhr, errmsg, err) {
+                $('#color').text('Success'); // remove the value from the input
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
     });
 }

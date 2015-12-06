@@ -1,9 +1,34 @@
 {% extends "base2.html" %}
 {% load staticfiles %}
 {% block content %}
-    <!-- Sign Up -->
+    <script language="JavaScript" type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/engine.js' %}"></script>
+    <section id="engine" class="wrapper style1 special">
+        <header class="major align-center">
+            <h2>Your App Status</h2>
+        </header>
+        <div class="inner">
+            <span>
+                <i class="fa fa-spinner fa-spin fa-2x"></i>
+            </span>
+            <ul class="actions vertical alt align-left">
+                <li>Last Status: <em id="status"></em></li>
+                <li>Emotion: <em id="emotion"></em></li>
+                <li>Color: <em id="color"></em></li>
+            </ul>
+        </div>
+        <div class="6u 12u$(xsmall)">
+            <input type="text" name="first_name" id="gotcha" value="" placeholder="Status"
+                   required/>
+        </div>
+        <input type="submit" id="test" value="Run" class="special"/>
+        <input type="submit" id="test2" value="Classify"/>
+    </section>
 
-    <section id="anim" class="wrapper style0 special">
+    <section class="wrapper style0 special">
+        <header class="major align-center">
+            <h2>Your App Settings</h2>
+        </header>
         <div class="inner">
             <ul class="features ">
                 <li class="icon fa-facebook-official ripplelink">

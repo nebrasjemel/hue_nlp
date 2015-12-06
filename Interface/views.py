@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from Interface.models import FacebookAccount, PhilipsHue
 from Interface.forms import FbForm
-import socket
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -10,27 +10,24 @@ import socket
 @login_required
 def profile(request):
     title = "Welcome, " + request.user.get_username()
-    message = "This is your settings page."
+    message = "This is your main page."
     return render(request, "profile.html", {'title': title, 'message': message})
 
 
+@csrf_exempt
 @login_required
 def social(request):
     title = "Social Settings"
     query = FacebookAccount.objects.filter(user_id=request.user.id)
     if request.method == 'POST':
-        form = FbForm(data=request.POST)
-        form.user = request.user
-        if form.is_valid():
-            # Save the user's form data to the database.
-            form.save()
-            message = "Hue Added Successfully"
-
+        form = FacebookAccount(user=request.user, account_id=request.POST['userID'],
+                               access_token=request.POST['access_token'],
+                               account_name=request.POST['account_name'])
+        # Save the user's form data to the database.
+        form.save()
+        message = "Account Added Successfully"
         # Print problems to terminal
-        else:
-            print(form.errors)
-            message = form.errors
-
+        print(request.POST['account_name'])
     # Not POST , redirect to needed page
     else:
         message = "Manage Your Social Media Accounts"
