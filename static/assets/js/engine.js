@@ -113,8 +113,8 @@ $(document).ready(function() {
     $("#run").click(function(e) {
         e.preventDefault();
         run = true;
-        $("#choice").hide(400);
-        $("#engine").show(700);
+        $("#choice").slideUp(400);
+        $("#engine").slideDown(700);
     });
     setInterval(function() {
         if (run == true) {

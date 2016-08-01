@@ -20,7 +20,7 @@
 
 		<!-- Header -->
 		<header id="header" class="alt">
-			<h1><a {% if user.is_authenticated %}href="/profile"{% else %} href="/" {% endif %}>Sentalight</a></h1> {% if user.is_authenticated %} {% block navbar %}
+			<h1><a {% if user.is_authenticated %}href="/profile"{% else %} href="/" {% endif %}>Sentalight</a></h1> {% if user.is_authenticated %}
 			<nav id="nav">
 				<ul>
 					<li class="special">
@@ -38,7 +38,7 @@
 					</li>
 				</ul>
 			</nav>
-			{% endblock %} {% else %} {% block navbar %}
+			{% else %}
 			<nav id="nav">
 				<ul>
 					<li class="special">
@@ -54,7 +54,7 @@
 					</li>
 				</ul>
 			</nav>
-			{% endblock %} {% endif %}
+			 {% endif %}
 		</header>
 
 		{% block content %}{% endblock %}

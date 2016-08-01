@@ -17,7 +17,6 @@
     <header id="header">
         <h1><a href="/">Sentalight | Profile</a></h1>
         {% if user.is_authenticated %}
-        {% block navbar %}
             <nav id="nav">
                 <ul>
                     <li class="special">
@@ -35,9 +34,7 @@
                     </li>
                 </ul>
             </nav>
-        {% endblock %}
         {% else %}
-        {% block navbar %}
             <nav id="nav">
                 <ul>
                     <li class="special">
@@ -53,7 +50,6 @@
                     </li>
                 </ul>
             </nav>
-        {% endblock %}
         {% endif %}
 
     </header>
