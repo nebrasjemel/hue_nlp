@@ -9,3 +9,4 @@ python-dateutil==2.5.3
 requests==2.10.0
 six==1.10.0
 wheel==0.26.0
+whitenoise==3.2
